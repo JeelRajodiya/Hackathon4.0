@@ -1,15 +1,23 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require("bcrypt")
+const ip = require('ip');
+const ipAddress = ip.address();
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
+const cors = require('cors');
 require('dotenv').config()
 // console.log(process.env.SENDER_EMAIL,process.env.EMAIL_PASS);
+
+
 
 var pas = process.env.EMAIL_PASS;
 console.log(pas);
 
 const app = express();
+app.use(cors({
+}));
+app.use(express.json());
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -79,9 +87,9 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-})
+// app.get('/', (req, res) => {
+//     res.sendFile(__dirname + '/index.html');
+// })
 
 app.get('/signup', (req, res) => {
     res.sendFile(__dirname + '/signup.html');
@@ -155,7 +163,10 @@ app.post('/', async (req, res) => {
 
     const pass = req.body.pwd;
     const mail = req.body.email;
-
+    console.log("Yoyo");
+    console.log(req.body);
+    console.log(pass);
+    console.log(mail);
     let check = await User.findOne({ email: mail });
 
     if (check) {
@@ -164,11 +175,13 @@ app.post('/', async (req, res) => {
             res.send("Welcome to Dashboard");
         }
         else {
+            
             res.redirect('/');
         }
     }
     else {
-        res.redirect('/signup');
+        res.send("Not Find");
+        // res.redirect('/signup');
     }
 })
 
@@ -188,4 +201,16 @@ app.post('/forgot', async (req, res) => {
     res.redirect('/otpf');
 })
 
-app.listen(3434);
+app.listen(3430, ()=>{
+    console.log(`Network access via: ${ipAddress}:${3430}!`);
+});
+
+
+app.post('/signup', async (req, res) => {
+    otpgen(req.body.email);
+    nname = req.body.nam;
+    eemail = req.body.email;
+    passw = req.body.pwdd;
+    console.log(req.body.pwdd);
+    res.sendFile(__dirname + '/otpsu.html');
+})
