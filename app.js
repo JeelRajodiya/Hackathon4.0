@@ -88,17 +88,17 @@ const User = mongoose.model("User", userSchema);
 //     res.sendFile(__dirname + '/index.html');
 // })
 
-app.get("/signup", (req, res) => {
-	res.sendFile(__dirname + "/signup.html");
-});
+// app.get("/signup", (req, res) => {
+// 	res.sendFile(__dirname + "/signup.html");
+// });
 
-app.get("/forgot", (req, res) => {
-	res.sendFile(__dirname + "/forgot.html");
-});
+// app.get("/forgot", (req, res) => {
+// 	res.sendFile(__dirname + "/forgot.html");
+// });
 
-app.get("/otpf", (req, res) => {
-	res.sendFile(__dirname + "/otpf.html");
-});
+// app.get("/otpf", (req, res) => {
+// 	res.sendFile(__dirname + "/otpf.html");
+// });
 
 app.post("/otpcheck", (req, res) => {
 	if (req.body.otpp == otp) {
@@ -112,7 +112,7 @@ app.post("/otpcheck", (req, res) => {
 
 app.post("/otpf", async (req, res) => {
 	if (otp == req.body.otpf) {
-		res.sendFile(__dirname + "/newpass.html");
+		// res.sendFile(__dirname + "/newpass.html");
 	} else {
 		res.send("better luck next time");
 	}
@@ -180,7 +180,7 @@ app.post("/signup", async (req, res) => {
 	eemail = req.body.email;
 	passw = req.body.pwdd;
 	console.log(req.body.pwdd);
-	res.sendFile(__dirname + "/otpsu.html");
+	// res.sendFile(__dirname + "/otpsu.html");
 });
 
 app.post("/forgot", async (req, res) => {
@@ -200,5 +200,5 @@ app.post("/signup", async (req, res) => {
 	eemail = req.body.email;
 	passw = req.body.pwdd;
 	console.log(req.body.pwdd);
-	res.sendFile(__dirname + "/otpsu.html");
+	// res.sendFile(__dirname + "/otpsu.html");
 });
