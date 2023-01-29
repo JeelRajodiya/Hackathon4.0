@@ -103,16 +103,19 @@ const User = mongoose.model("User", userSchema);
 app.post("/otpcheck", (req, res) => {
 	if (req.body.otpp == otp) {
 		console.log("Successful");
-		res.redirect("/");
+		// res.redirect("/");
+		res.send(200);
 	} else {
 		console.log("UnSuccessful");
-		res.redirect("/signup");
+		res.send(403);
+		// res.redirect("/signup");
 	}
 });
 
 app.post("/otpf", async (req, res) => {
 	if (otp == req.body.otpf) {
 		// res.sendFile(__dirname + "/newpass.html");
+		res.send(200);
 	} else {
 		res.send("better luck next time");
 	}
@@ -166,7 +169,8 @@ app.post("/", async (req, res) => {
 		if (match) {
 			res.send("Welcome to Dashboard");
 		} else {
-			res.redirect("/");
+			res.send("wrong Pass");
+			// res.redirect("/");
 		}
 	} else {
 		res.send("Not Find");
@@ -180,6 +184,7 @@ app.post("/signup", async (req, res) => {
 	eemail = req.body.email;
 	passw = req.body.pwdd;
 	console.log(req.body.pwdd);
+	res.send(200);
 	// res.sendFile(__dirname + "/otpsu.html");
 });
 
@@ -187,7 +192,9 @@ app.post("/forgot", async (req, res) => {
 	console.log(req.body.email);
 	eemail = req.body.email;
 	otpgen(req.body.email);
-	res.redirect("/otpf");
+	res.send(200);
+
+	// res.redirect("/otpf");
 });
 
 app.listen(process.env.PORT, () => {
@@ -200,5 +207,7 @@ app.post("/signup", async (req, res) => {
 	eemail = req.body.email;
 	passw = req.body.pwdd;
 	console.log(req.body.pwdd);
+	res.send(200);
+
 	// res.sendFile(__dirname + "/otpsu.html");
 });
