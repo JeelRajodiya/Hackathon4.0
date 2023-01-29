@@ -190,7 +190,7 @@ app.post("/forgot", async (req, res) => {
 	res.redirect("/otpf");
 });
 
-app.listen(3430, () => {
+app.listen(process.env.PORT, () => {
 	console.log(`Network access via: ${ipAddress}:${3430}!`);
 });
 
